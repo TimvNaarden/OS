@@ -1,0 +1,52 @@
+[
+  {
+    "arguments": [
+      "/usr/bin/clang",
+      "-target",
+      "x86_64-unknown-windows",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-mno-red-zone",
+      "-ffreestanding",
+      "-fshort-wchar",
+      "-IGNU-EFI/inc",
+      "-IGNU-EFI/inc/x86_64",
+      "-IGNU-EFI/inc/protocol",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/efi.o",
+      "efi/efi.c"
+    ],
+    "directory": "/home/tim/D-Schijf/Coding/OS/UEFI",
+    "file": "/home/tim/D-Schijf/Coding/OS/UEFI/efi/efi.c",
+    "output": "/home/tim/D-Schijf/Coding/OS/UEFI/obj/efi.o"
+  },
+  {
+    "arguments": [
+      "/usr/bin/clang",
+      "-target",
+      "x86_64-unknown-windows",
+      "-std=c17",
+      "-Wall",
+      "-Wextra",
+      "-Wpedantic",
+      "-mno-red-zone",
+      "-ffreestanding",
+      "-fshort-wchar",
+      "-IGNU-EFI/inc",
+      "-IGNU-EFI/inc/x86_64",
+      "-IGNU-EFI/inc/protocol",
+      "-I/usr/include",
+      "-c",
+      "-o",
+      "obj/data.o",
+      "GNU-EFI/lib/data.c"
+    ],
+    "directory": "/home/tim/D-Schijf/Coding/OS/UEFI",
+    "file": "/home/tim/D-Schijf/Coding/OS/UEFI/GNU-EFI/lib/data.c",
+    "output": "/home/tim/D-Schijf/Coding/OS/UEFI/obj/data.o"
+  }
+]
