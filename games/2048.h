@@ -1,9 +1,7 @@
 #pragma once
 
-
-
 typedef struct Board {
-    int grid[4][4];
+  int grid[4][4];
 } Board;
 
 void initBoard(Board *board);
@@ -16,4 +14,3 @@ int moveLeft(Board *board);
 int moveRight(Board *board);
 int moveUp(Board *board);
 int moveDown(Board *board);
-

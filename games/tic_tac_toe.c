@@ -1,5 +1,6 @@
 #include "tic_tac_toe.h"
-
+#include "../kernel/mem.h"
+#include "../drivers/display.h"
 
 void initTTT_Board(TTT_Board* bT) {
     int i = 49;

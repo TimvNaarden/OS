@@ -7,7 +7,7 @@
 #include "../kernel/kernel.h"
 #include "../games/2048.h"
 #include "../games/tic_tac_toe.h"
-
+#include "../kernel/mem.h"
 #define BACKSPACE 0x0E
 #define ENTER 0x1C
 #define SC_MAX 57
