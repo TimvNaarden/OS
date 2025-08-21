@@ -1,6 +1,7 @@
 #include "tic_tac_toe.h"
 #include "../util/util.h"
 
+int seedTTT = 42;
 void initTTT_Board(TTT_Board *bT) {
   int i = 49;
   for (int j = 0; j < 9; j++) {
@@ -16,7 +17,7 @@ void printTTT_Board(TTT_Board *bT) {
     result[0] = bT->gridT[j];
     result[1] = '\0';
     if ((j % 3) == 0 && j != 0) {
-      print_string("---------\n");
+      print_string("---------\r\n");
     }
     if (j != 2 && j != 5 && j != 8) {
       print_string(result);
@@ -27,11 +28,6 @@ void printTTT_Board(TTT_Board *bT) {
     }
     mem_free(result);
   }
-}
-unsigned int seedTTT = 42;
-int createRandomTTT() {
-  seedTTT = (214013 * seedTTT + 2531011);
-  return (seedTTT >> 16) & 0x7FFF;
 }
 int moveTTT(TTT_Board *bT, int place) {
   seedTTT = place;
@@ -82,4 +78,9 @@ int hasWon(TTT_Board *bT) {
     return bT->gridT[6];
   }
   return 0;
+}
+
+int createRandomTTT() {
+  seedTTT = (214013 * seedTTT + 2531011);
+  return (seedTTT >> 16) & 0x7FFF;
 }

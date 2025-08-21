@@ -1,16 +1,8 @@
-/*
- * NOTE: void* fields in structs = not implemented!!
- */
 #pragma once
-// __has_include is clang/gcc defined; But should be in C standard C2X
-#if __has_include(<uchar.h>)
-#include <uchar.h>
-#endif
 
 #include <efi.h>
 #include <efilib.h>
-#include <stddef.h> // NULL
-#include <stdint.h>
+#include <stddef.h>
 
 // #ifndef _UCHAR_H
 // typedef uint_least16_t char16_t;

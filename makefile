@@ -63,4 +63,4 @@ $(OBJDIR)/%.o: %.c
 
 # Clean
 clean:
-	rm -rf $(OBJDIR) $(OUTPUT_DIR)
+	rm -rf $(OBJDIR) $(OUTPUT_DIR) .cache

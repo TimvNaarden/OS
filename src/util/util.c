@@ -1,6 +1,26 @@
 #include "util.h"
 #include "mem.h"
 #include <efi.h>
+#include <uchar.h>
+
+void uitoa_hex(unsigned int value, char *buf) {
+  static const char hex[] = "0123456789ABCDEF";
+  char *p = buf;
+
+  *p++ = '0';
+  *p++ = 'x';
+
+  // convert each nibble (4 bits)
+  int started = 0;
+  for (int i = (sizeof(value) * 8) - 4; i >= 0; i -= 4) {
+    unsigned int digit = (value >> i) & 0xF;
+    if (digit != 0 || started || i == 0) {
+      *p++ = hex[digit];
+      started = 1;
+    }
+  }
+  *p = '\0';
+}
 int string_length(char s[]) {
   int i = 0;
   while (s[i] != '\0')
@@ -65,24 +85,6 @@ void charToChar16(const char *input, CHAR16 *output, size_t outputSize) {
   output[outputSize - 1] = L'\0'; // Null-terminate the char16 string
 }
 
-void scroll_screen(UINTN lines) {
-  UINTN rows, cols;
-  g_SystemTable->ConOut->QueryMode(
-      g_SystemTable->ConOut, g_SystemTable->ConOut->Mode->Mode, &cols, &rows);
-  if (lines >= rows) {
-    g_SystemTable->ConOut->ClearScreen(g_SystemTable->ConOut);
-    return;
-  }
-
-  for (UINTN i = lines; i < g_SystemTable->ConOut->Mode->CursorRow; i++) {
-    g_SystemTable->ConOut->SetCursorPosition(g_SystemTable->ConOut, 0,
-                                             i - lines);
-    g_SystemTable->ConOut->OutputString(g_SystemTable->ConOut, L" ");
-    g_SystemTable->ConOut->SetCursorPosition(g_SystemTable->ConOut, 0, i);
-    g_SystemTable->ConOut->OutputString(g_SystemTable->ConOut, L"\r\n");
-  }
-}
-
 void print_string(char *string) {
   // UINTN rows, cols;
   // g_SystemTable->ConOut->QueryMode(g_SystemTable->ConOut,
@@ -113,4 +115,13 @@ void print_nl() {
 
 void clear_screen() {
   g_SystemTable->ConOut->ClearScreen(g_SystemTable->ConOut);
+}
+
+int inString(char a, char *b) {
+  char *c;
+  for (c = b; *c != '\0'; c++) {
+    if (*c == a)
+      return 1;
+  }
+  return 0;
 }

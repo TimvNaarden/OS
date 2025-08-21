@@ -76,7 +76,9 @@ void *find_best_mem_block(dynamic_mem_node_t *dynamic_mem, size_t size) {
   dynamic_mem_node_t *current_mem_block = dynamic_mem;
   while (current_mem_block) {
     // check if block can be used and is smaller than current best
-    if ((!current_mem_block->used) && (current_mem_block->size >= (size + DYNAMIC_MEM_NODE_SIZE)) && (current_mem_block->size <= best_mem_block_size)) {
+    if ((!current_mem_block->used) &&
+        (current_mem_block->size >= (size + DYNAMIC_MEM_NODE_SIZE)) &&
+        (current_mem_block->size <= best_mem_block_size)) {
       // update best block
       best_mem_block = current_mem_block;
       best_mem_block_size = current_mem_block->size;
@@ -89,15 +91,20 @@ void *find_best_mem_block(dynamic_mem_node_t *dynamic_mem, size_t size) {
 }
 
 void *mem_alloc(size_t size) {
-  dynamic_mem_node_t *best_mem_block = (dynamic_mem_node_t *)find_best_mem_block(dynamic_mem_start, size);
+  dynamic_mem_node_t *best_mem_block =
+      (dynamic_mem_node_t *)find_best_mem_block(dynamic_mem_start, size);
 
   // check if we actually found a matching (free, large enough) block
   if (best_mem_block != NULL_POINTER) {
-    // subtract newly allocated memory (incl. size of the mem node) from selected block
+    // subtract newly allocated memory (incl. size of the mem node) from
+    // selected block
     best_mem_block->size = best_mem_block->size - size - DYNAMIC_MEM_NODE_SIZE;
 
-    // create new mem node after selected node, effectively splitting the memory region
-    dynamic_mem_node_t *mem_node_allocate = (dynamic_mem_node_t *)(((uint8_t *)best_mem_block) + DYNAMIC_MEM_NODE_SIZE + best_mem_block->size);
+    // create new mem node after selected node, effectively splitting the memory
+    // region
+    dynamic_mem_node_t *mem_node_allocate =
+        (dynamic_mem_node_t *)(((uint8_t *)best_mem_block) +
+                               DYNAMIC_MEM_NODE_SIZE + best_mem_block->size);
     mem_node_allocate->size = size;
     mem_node_allocate->used = true;
     mem_node_allocate->next = best_mem_block->next;
@@ -154,7 +161,8 @@ void mem_free(void *p) {
   }
 
   // get mem node associated with pointer
-  dynamic_mem_node_t *current_mem_node = (dynamic_mem_node_t *)((uint8_t *)p - DYNAMIC_MEM_NODE_SIZE);
+  dynamic_mem_node_t *current_mem_node =
+      (dynamic_mem_node_t *)((uint8_t *)p - DYNAMIC_MEM_NODE_SIZE);
 
   // pointer we're trying to free was not dynamically allocated it seems
   if (current_mem_node == NULL_POINTER) {
@@ -191,10 +199,8 @@ void *alloc(int n) {
 
 void init_memory() {
   clear_screen();
-  print_string("Initializing dynamic memory.\r\n");
   init_dynamic_mem();
-
-  clear_screen();
+  print_string("Initializing dynamic memory.\r\n");
 
   print_string("init_dynamic_mem()\r\n");
   print_dynamic_node_size();

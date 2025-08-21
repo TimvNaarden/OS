@@ -23,4 +23,7 @@ int compare_string(char s1[], char s2[]);
 void print_string(char *string);
 void print_nl();
 void clear_screen();
-void scroll_screen(UINTN lines);
+
+void uitoa_hex(unsigned int value, char *buf);
+
+int inString(char a, char *b);

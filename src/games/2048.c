@@ -1,5 +1,6 @@
 #include "2048.h"
 #include "../util/util.h"
+
 char *int_to_array(int N) {
   if (N < 10) {
     char *result = (char *)mem_alloc(2 * sizeof(char));
