@@ -1,0 +1,8 @@
+services:
+  os_web:
+    image: python:latest
+    command: sh -c "cd /usr/src/app && python3 -m http.server 2> /dev/null"
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/usr/src/app
